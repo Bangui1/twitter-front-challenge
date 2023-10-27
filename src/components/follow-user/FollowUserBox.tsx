@@ -24,9 +24,7 @@ const FollowUserBox = ({
   const service = useHttpRequestService();
   const { t } = useTranslation();
 
-  const [isFollowing, setIsFollowing] = useState(
-    user.following.some((f) => f.id === id)
-  );
+  const [isFollowing, setIsFollowing] = useState(false);
 
   const handleFollow = async () => {
     if (isFollowing) {

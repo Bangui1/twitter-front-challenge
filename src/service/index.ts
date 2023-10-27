@@ -26,7 +26,7 @@ export interface Post {
   authorId: string;
   author: Author;
   reactions: Reaction[];
-  comments: Post[];
+  qtyComments: number;
 }
 
 export interface Reaction {
