@@ -73,3 +73,9 @@ export interface ChatDTO {
   users: Author[];
   messages: MessageDTO[];
 }
+
+export interface FollowDTO {
+  id: string;
+  followerId: string;
+  followedId: string;
+}

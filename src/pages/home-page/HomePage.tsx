@@ -7,6 +7,7 @@ import { SearchBar } from "../../components/search-bar/SearchBar";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { StyledUserSuggestionContainer } from "./UserSeuggestionContainer";
+import {FollowDTO} from "../../service";
 
 const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -17,8 +18,12 @@ const HomePage = () => {
   const handleSetUser = async () => {
     try {
       const user = await service.me();
+      const follows = await service.getFollowing(user.user.id);
+      const followers = await service.getFollowers(user.user.id);
+      user.user.following = follows.map((follow: FollowDTO) => follow.followedId);
+      user.user.followers = followers.map((follow: FollowDTO) => follow.followerId);
       const data = await service.getPosts(query);
-      dispatch(setUser(user));
+      dispatch(setUser(user.user));
       dispatch(updateFeed(data));
     } catch (e) {
       navigate("/sign-in");

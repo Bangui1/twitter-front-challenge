@@ -14,7 +14,7 @@ import { StyledH5 } from "../../components/common/text";
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState<User | null>(null);
-  const [following, setFollowing] = useState<boolean>(false);
+  const [following, setFollowing] = useState<boolean>(true);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalValues, setModalValues] = useState({
     text: "",
@@ -38,6 +38,13 @@ const ProfilePage = () => {
       return { component: ButtonType.OUTLINED, text: t("buttons.unfollow") };
     else return { component: ButtonType.FOLLOW, text: t("buttons.follow") };
   };
+
+  const getFollowing = () => {
+    console.log(user.following)
+    const isFollowing = user.following.some((f) => f.id === profile?.id);
+    console.log(isFollowing)
+    setFollowing(isFollowing);
+  }
 
   const handleSubmit = () => {
     if (profile?.id === user.id) {
@@ -80,7 +87,7 @@ const ProfilePage = () => {
         });
       } else {
         await service.followUser(id);
-        service.getProfile(id).then((res) => setProfile(res));
+        service.getProfile(id).then((res) => setProfile(res.user));
       }
       return await getProfileData();
     }
@@ -90,24 +97,19 @@ const ProfilePage = () => {
     service
       .getProfile(id)
       .then((res) => {
-        setProfile(res);
-        setFollowing(
-          res
-            ? res?.followers.some((follower: User) => follower.id === user.id)
-            : false
-        );
+        setProfile(res.user);
       })
       .catch(() => {
         service
           .getProfileView(id)
           .then((res) => {
-            setProfile(res);
-            setFollowing(false);
+            setProfile(res.user);
           })
           .catch((error2) => {
             console.log(error2);
           });
       });
+    getFollowing();
   };
 
   return (
