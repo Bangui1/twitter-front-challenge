@@ -26,15 +26,15 @@ const Tweet = ({ post }: TweetProps) => {
   const navigate = useNavigate();
 
   const getCountByType = (type: string): number => {
-    return actualPost.reactions.filter((r) => r.type === type).length ?? 0;
+    return actualPost.reactions.filter((r) => r.reactionType === type).length ?? 0;
   };
 
   const handleReaction = async (type: string) => {
     const reacted = actualPost.reactions.find(
-      (r) => r.type === type && r.userId === user.id
+      (r) => r.reactionType === type && r.userId === user.id
     );
     if (reacted) {
-      await service.deleteReaction(reacted.id);
+      await service.deleteReaction(actualPost.id, type);
     } else {
       await service.createReaction(actualPost.id, type);
     }
@@ -44,7 +44,7 @@ const Tweet = ({ post }: TweetProps) => {
 
   const hasReactedByType = (type: string): boolean => {
     return actualPost.reactions.some(
-      (r) => r.type === type && r.userId === user.id
+      (r) => r.reactionType === type && r.userId === user.id
     );
   };
 

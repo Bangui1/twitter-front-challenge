@@ -96,7 +96,7 @@ const httpRequestService = {
   createReaction: async (postId: string, reaction: string) => {
     const res = await axios.post(
       `${url}/reaction/${postId}`,
-      { type: reaction },
+      { reactionType: reaction },
       {
         headers: {
           Authorization: localStorage.getItem("token"),
@@ -107,12 +107,16 @@ const httpRequestService = {
       return res.data;
     }
   },
-  deleteReaction: async (reactionId: string) => {
-    const res = await axios.delete(`${url}/reaction/${reactionId}`, {
+  deleteReaction: async (postId: string, type: string) => {
+    const res = await axios.delete(`${url}/reaction/${postId}`, {
       headers: {
         Authorization: localStorage.getItem("token"),
       },
-    });
+      data: {
+        reactionType: type,
+      },
+      }
+    );
     if (res.status === 200) {
       return res.data;
     }
@@ -320,7 +324,7 @@ const httpRequestService = {
     }
   },
   getCommentsByPostId: async (id: string) => {
-    const res = await axios.get(`${url}/post/comment/by_post/${id}`, {
+    const res = await axios.get(`${url}/post/comment/${id}`, {
       headers: {
         Authorization: localStorage.getItem("token"),
       },

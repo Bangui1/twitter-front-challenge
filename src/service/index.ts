@@ -20,7 +20,7 @@ export interface PostData {
 export interface Post {
   id: string;
   content: string;
-  parentId?: string;
+  parentPostId?: string;
   images?: string[];
   createdAt: Date;
   authorId: string;
@@ -31,7 +31,7 @@ export interface Post {
 
 export interface Reaction {
   id: string;
-  type: string;
+  reactionType: string;
   createdAt: Date;
   userId: string;
   postId: string;
