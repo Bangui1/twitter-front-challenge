@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {ChangeEvent, ChangeEventHandler, useState} from "react";
 import Button from "../button/Button";
 import TweetInput from "../tweet-input/TweetInput";
 import { useHttpRequestService } from "../../service/HttpRequestService";
@@ -11,21 +11,33 @@ import { ButtonType } from "../button/StyledButton";
 import { StyledTweetBoxContainer } from "./TweetBoxContainer";
 import { StyledContainer } from "../common/Container";
 import { StyledButtonContainer } from "./ButtonContainer";
-import { useDispatch, useSelector } from "react-redux";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 
-const TweetBox = (props) => {
-  const { parentId, close, mobile } = props;
-  const [content, setContent] = useState("");
-  const [images, setImages] = useState([]);
-  const [imagesPreview, setImagesPreview] = useState([]);
+interface TweetBoxProps {
+    parentId?: string;
+    close?: () => void;
+    mobile?: boolean;
+}
 
-  const { user, length, query } = useSelector((state) => state.user);
+const TweetBox = (
+    {
+      parentId,
+      close,
+      mobile,
+    }:TweetBoxProps) => {
+  const [content, setContent] = useState<string>("");
+  const [images, setImages] = useState<File[]>([]);
+  const [imagesPreview, setImagesPreview] = useState<string[]>([]);
+
+  const user = useAppSelector((state) => state.user.user);
+  const length = useAppSelector((state) => state.user.length);
+  const query = useAppSelector((state) => state.user.query);
   const httpService = useHttpRequestService();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
-  const handleChange = (e) => {
-    setContent(e.target.value);
+  const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(event.target.value);
   };
   const handleSubmit = async () => {
     try {
@@ -33,7 +45,7 @@ const TweetBox = (props) => {
       setImages([]);
       setImagesPreview([]);
       dispatch(setLength(length + 1));
-      const posts = await httpService.getPosts(length + 1, "", query);
+      const posts = await httpService.getPaginatedPosts(length + 1, "", query);
       dispatch(updateFeed(posts));
       close && close();
     } catch (e) {
@@ -41,14 +53,14 @@ const TweetBox = (props) => {
     }
   };
 
-  const handleRemoveImage = (index) => {
+  const handleRemoveImage = (index: number) => {
     const newImages = images.filter((i, idx) => idx !== index);
     const newImagesPreview = newImages.map((i) => URL.createObjectURL(i));
     setImages(newImages);
     setImagesPreview(newImagesPreview);
   };
 
-  const handleAddImage = (newImages) => {
+  const handleAddImage = (newImages: File[]) => {
     setImages(newImages);
     const newImagesPreview = newImages.map((i) => URL.createObjectURL(i));
     setImagesPreview(newImagesPreview);
