@@ -5,6 +5,7 @@ import { ButtonType } from "../button/StyledButton";
 import { StyledModalContainer } from "./ModalContainer";
 import { StyledContainer } from "../common/Container";
 import { StyledH5, StyledP } from "../common/text";
+import {useOutsideAlerter} from "../../hooks/useOutsideAlerter";
 
 interface ModalProps {
   show: boolean;
@@ -23,11 +24,12 @@ const Modal = ({
   img,
   title,
 }: ModalProps) => {
+  const ref = useOutsideAlerter({onOutsideClick: onClose});
   return (
     <>
       {show && (
         <StyledBlurredBackground>
-          <StyledModalContainer>
+          <StyledModalContainer ref={ref}>
             <StyledContainer alignItems={"center"} justifyContent={"center"}>
               {img && (
                 <img src={img} alt={"modal"} width={"32px"} height={"26px"} />

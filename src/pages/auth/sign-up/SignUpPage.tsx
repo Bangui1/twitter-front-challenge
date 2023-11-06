@@ -34,7 +34,7 @@ const SignUpPage = () => {
     httpRequestService
       .signUp(requestData)
       .then(() => navigate("/"))
-      .catch(() => setError(false));
+      .catch(() => setError(true));
   };
 
   return (
@@ -83,6 +83,7 @@ const SignUpPage = () => {
               error={error}
               onChange={handleChange("confirmPassword")}
             />
+            <p className={"error-message"}>{error && t("error.register")}</p>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <Button

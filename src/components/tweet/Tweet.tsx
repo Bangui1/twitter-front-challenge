@@ -13,6 +13,7 @@ import ImageContainer from "./tweet-image/ImageContainer";
 import CommentModal from "../comment/comment-modal/CommentModal";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
+import {useOutsideAlerter} from "../../hooks/useOutsideAlerter";
 
 interface TweetProps {
   post: Post;
@@ -22,6 +23,7 @@ const Tweet = ({ post }: TweetProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showCommentModal, setShowCommentModal] = useState<boolean>(false);
   const user = useAppSelector((state) => state.user.user);
+  const alerter = useOutsideAlerter({onOutsideClick: () => setShowDeleteModal(false)})
   const service = useHttpRequestService();
   const navigate = useNavigate();
 
@@ -72,6 +74,7 @@ const Tweet = ({ post }: TweetProps) => {
               onClose={() => {
                 setShowDeleteModal(false);
               }}
+              alerter={alerter}
             />
             <ThreeDots
               onClick={() => {
