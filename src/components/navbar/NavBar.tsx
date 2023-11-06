@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import NavItem from "./navItem/NavItem";
 import Button from "../button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -17,6 +17,7 @@ import { StyledContainer } from "../common/Container";
 import { StyledIconContainer } from "./IconContainer";
 import { StyledNavItemsContainer } from "./navItem/NavItemsContainer";
 import { StyledP } from "../common/text";
+import {useOutsideAlerter} from "../../hooks/useOutsideAlerter";
 
 const NavBar = () => {
   const location = useLocation();
@@ -25,6 +26,7 @@ const NavBar = () => {
   const [tweetModalOpen, setTweetModalOpen] = useState(false);
   const [logoutOpen, setLogoutOpen] = useState(false);
   const { t } = useTranslation();
+  const alerter = useOutsideAlerter({onOutsideClick: () => setLogoutOpen(false)})
   const handleAvatarClick = () => {
     if (window.innerWidth < 1265) {
       handleLogout();
@@ -96,7 +98,7 @@ const NavBar = () => {
         gap={"8px"}
         alignItems={"center"}
       >
-        <LogoutPrompt show={logoutOpen} />
+        <LogoutPrompt show={logoutOpen} alerter={alerter} />
         <Avatar
           src={user.profilePicture ?? Icon}
           onClick={handleAvatarClick}

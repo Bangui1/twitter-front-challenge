@@ -14,12 +14,14 @@ interface DeletePostModalProps {
   show: boolean;
   onClose: () => void;
   id: string;
+  alerter: any;
 }
 
 export const DeletePostModal = ({
   show,
   id,
   onClose,
+  alerter,
 }: DeletePostModalProps) => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const feed = useAppSelector((state) => state.user.feed);

@@ -10,17 +10,20 @@ import { useAppSelector } from "../../../redux/hooks";
 import { StyledPromptContainer } from "./PromptContainer";
 import { StyledContainer } from "../../common/Container";
 import { StyledP } from "../../common/text";
+import {useOutsideAlerter} from "../../../hooks/useOutsideAlerter";
 
 interface LogoutPromptProps {
   show: boolean;
+  alerter: any;
 }
 
-const LogoutPrompt = ({ show }: LogoutPromptProps) => {
+const LogoutPrompt = ({ show , alerter }: LogoutPromptProps) => {
   const [showPrompt, setShowPrompt] = useState<boolean>(show);
   const [showModal, setShowModal] = useState<boolean>(false);
   const user = useAppSelector((state) => state.user.user);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const ref = useOutsideAlerter({onOutsideClick: () => setShowPrompt(false)})
   const handleClick = () => {
     setShowModal(true);
   };
@@ -45,7 +48,7 @@ const LogoutPrompt = ({ show }: LogoutPromptProps) => {
   return (
     <>
       {showPrompt && (
-        <StyledPromptContainer>
+        <StyledPromptContainer ref={ref}>
           <StyledContainer
             flexDirection={"row"}
             gap={"16px"}
