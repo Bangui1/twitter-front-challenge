@@ -14,7 +14,8 @@ import { StyledH5 } from "../../components/common/text";
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState<User | null>(null);
-  const [following, setFollowing] = useState<boolean>(true);
+  const [following, setFollowing] = useState<boolean>(false);
+  const [isPrivate, setIsPrivate] = useState<boolean>(true);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalValues, setModalValues] = useState({
     text: "",
@@ -39,11 +40,10 @@ const ProfilePage = () => {
     else return { component: ButtonType.FOLLOW, text: t("buttons.follow") };
   };
 
-  const getFollowing = () => {
-    console.log(user.following)
-    const isFollowing = user.following.some((f) => f.id === profile?.id);
-    console.log(isFollowing)
-    setFollowing(isFollowing);
+  const getFollowing = async () => {
+    service.getFollowing(user.id).then((res) => {
+        setFollowing(res.some((f: any) => f.followedId === id));
+    });
   }
 
   const handleSubmit = () => {
@@ -98,6 +98,7 @@ const ProfilePage = () => {
       .getProfile(id)
       .then((res) => {
         setProfile(res.user);
+        setIsPrivate(res.user.private);
       })
       .catch(() => {
         service
@@ -109,7 +110,7 @@ const ProfilePage = () => {
             console.log(error2);
           });
       });
-    getFollowing();
+    await getFollowing();
   };
 
   return (
@@ -147,7 +148,7 @@ const ProfilePage = () => {
               </StyledContainer>
             </StyledContainer>
             <StyledContainer width={"100%"}>
-              {profile.followers ? (
+              {following || !isPrivate ? (
                 <ProfileFeed />
               ) : (
                 <StyledH5>Private account</StyledH5>

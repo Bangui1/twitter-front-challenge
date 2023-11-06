@@ -38,9 +38,13 @@ const TweetBox = (
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
+    console.log(content);
+    console.log(images)
+    console.log(imagesPreview)
   };
   const handleSubmit = async () => {
     try {
+      await httpService.createPost({content, images});
       setContent("");
       setImages([]);
       setImagesPreview([]);
