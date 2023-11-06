@@ -38,14 +38,14 @@ api.interceptors.response.use(
 
 const httpRequestService = {
   signUp: async (data: Partial<SingUpData>) => {
-    const res = await api.post(`/auth/signup`, data);
+    const res = await axios.post(`${url}/auth/signup`, data);
     if (res.status === 201) {
       localStorage.setItem("token", `Bearer ${res.data.token}`);
       return true;
     }
   },
   signIn: async (data: SingInData) => {
-    const res = await api.post(`/auth/login`, data);
+    const res = await axios.post(`${url}/auth/login`, data);
     if (res.status === 200) {
       localStorage.setItem("token", `Bearer ${res.data.token}`);
       return true;
