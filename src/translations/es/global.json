@@ -36,7 +36,9 @@
   },
   "error": {
     "login": "Lo siento, tu nombre de usuario o contraseña es incorrecto. Por favor, inténtalo de nuevo.",
-    "register": "Lo siento, el nombre de usuario o el correo electrónico ya están en uso. Por favor, inténtalo de nuevo."
+    "register": "Lo siento, el nombre de usuario o el correo electrónico ya están en uso. Por favor, inténtalo de nuevo.",
+    "required": "Este campo es obligatorio.",
+    "email": "Por favor, introduce una dirección de correo electrónico válida."
   },
   "input-params": {
     "username": "Nombre de usuario",

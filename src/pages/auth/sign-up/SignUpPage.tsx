@@ -9,6 +9,8 @@ import LabeledInput from "../../../components/labeled-input/LabeledInput";
 import Button from "../../../components/button/Button";
 import { ButtonType } from "../../../components/button/StyledButton";
 import { StyledH3 } from "../../../components/common/text";
+import {useFormik} from "formik";
+import {signUpValidate} from "../../../util/validateForm";
 
 interface SignUpData {
   name: string;
@@ -24,17 +26,34 @@ const SignUpPage = () => {
   const httpRequestService = useHttpRequestService();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const formik = useFormik<SignUpData>({
+    initialValues: {
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: signUpValidate,
+    onSubmit: (values: SignUpData) => {
+      httpRequestService
+        .signUp({
+          name: values.name,
+          username: values.username,
+          email: values.email,
+          password: values.password,
+        })
+        .then(() => navigate("/"))
+        .catch(() => setError(true));
+    },
+  });
 
   const handleChange =
     (prop: string) => (event: ChangeEvent<HTMLInputElement>) => {
       setData({ ...data, [prop]: event.target.value });
     };
   const handleSubmit = async () => {
-    const { confirmPassword, ...requestData } = data;
-    httpRequestService
-      .signUp(requestData)
-      .then(() => navigate("/"))
-      .catch(() => setError(true));
+    formik.handleSubmit();
   };
 
   return (
@@ -50,39 +69,59 @@ const SignUpPage = () => {
               required
               placeholder={"Enter name..."}
               title={t("input-params.name")}
-              error={error}
-              onChange={handleChange("name")}
+              error={error || (!!formik.errors.name && formik.touched.name)}
+              onChange={formik.handleChange}
+              id={"name"}
+              name={"name"}
+              value={formik.values.name}
             />
+            {formik.errors.name && formik.touched.name ? <p className={"error-message"}> {formik.errors.name}</p> : null}
             <LabeledInput
               required
               placeholder={"Enter username..."}
               title={t("input-params.username")}
-              error={error}
-              onChange={handleChange("username")}
+              error={error || (!!formik.errors.username && formik.touched.username)}
+              onChange={formik.handleChange}
+              id={"username"}
+              name={"username"}
+              value={formik.values.username}
             />
+            {formik.errors.username && formik.touched.username ? <p className={"error-message"}> {formik.errors.username}</p> : null}
             <LabeledInput
               required
               placeholder={"Enter email..."}
               title={t("input-params.email")}
-              error={error}
-              onChange={handleChange("email")}
+              error={error || (!!formik.errors.email && formik.touched.email)}
+              onChange={formik.handleChange}
+              id={"email"}
+              name={"email"}
+              value={formik.values.email}
             />
+            {formik.errors.email && formik.touched.email ? <p className={"error-message"}> {formik.errors.email}</p> : null}
             <LabeledInput
               type="password"
               required
               placeholder={"Enter password..."}
               title={t("input-params.password")}
-              error={error}
-              onChange={handleChange("password")}
+              error={error || (!!formik.errors.password && formik.touched.password)}
+              onChange={formik.handleChange}
+              id={"password"}
+              name={"password"}
+              value={formik.values.password}
             />
+            {formik.errors.password && formik.touched.password ? <p className={"error-message"}> {formik.errors.password}</p> : null}
             <LabeledInput
               type="password"
               required
               placeholder={"Confirm password..."}
               title={t("input-params.confirm-password")}
-              error={error}
-              onChange={handleChange("confirmPassword")}
+              error={error || (!!formik.errors.confirmPassword && formik.touched.confirmPassword)}
+              onChange={formik.handleChange}
+              id={"confirmPassword"}
+              name={"confirmPassword"}
+              value={formik.values.confirmPassword}
             />
+            {formik.errors.confirmPassword && formik.touched.confirmPassword ? <p className={"error-message"}> {formik.errors.confirmPassword}</p> : null}
             <p className={"error-message"}>{error && t("error.register")}</p>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>

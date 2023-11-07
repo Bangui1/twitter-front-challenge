@@ -34,7 +34,9 @@
   },
   "error": {
     "login": "Sorry, your username or password was incorrect. Please try again.",
-    "register": "Sorry, your username or email is already taken. Please try again."
+    "register": "Sorry, your username or email is already taken. Please try again.",
+    "required": "This field is required",
+    "email-error": "Please, enter a valid email address"
   },
   "input-params": {
     "username": "Username",
