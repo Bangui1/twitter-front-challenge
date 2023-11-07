@@ -17,8 +17,6 @@ interface SignInValues {
     password: string;
 }
 const SignInPage = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
 
 
@@ -74,7 +72,7 @@ const SignInPage = () => {
               name={"password"}
               value={formik.values.password}
             />
-                {formik.errors.password && formik.touched.password ? <p className={"error-message"}>{formik.errors.password}</p> : null}
+              {formik.errors.password && formik.touched.password ? <p className={"error-message"}>{formik.errors.password}</p> : null}
             <p className={"error-message"}>{error && t("error.login")}</p>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>

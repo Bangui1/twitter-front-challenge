@@ -1,4 +1,3 @@
-import type { ChangeEvent } from "react";
 import React, { useState } from "react";
 import logo from "../../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +19,6 @@ interface SignUpData {
   confirmPassword: string;
 }
 const SignUpPage = () => {
-  const [data, setData] = useState<Partial<SignUpData>>({});
   const [error, setError] = useState(false);
 
   const httpRequestService = useHttpRequestService();
@@ -48,10 +46,6 @@ const SignUpPage = () => {
     },
   });
 
-  const handleChange =
-    (prop: string) => (event: ChangeEvent<HTMLInputElement>) => {
-      setData({ ...data, [prop]: event.target.value });
-    };
   const handleSubmit = async () => {
     formik.handleSubmit();
   };
