@@ -54,7 +54,7 @@ const SignInPage = () => {
               required
               placeholder={"Enter email..."}
               title={t("input-params.email")}
-              error={error || !!formik.errors.email}
+              error={error || (!!formik.errors.email && formik.touched.email)}
               onChange={formik.handleChange}
               id={"email"}
               name={"email"}
@@ -66,7 +66,7 @@ const SignInPage = () => {
               required
               placeholder={"Enter password..."}
               title={t("input-params.password")}
-              error={error || !!formik.errors.password}
+              error={error || (!!formik.errors.password && formik.touched.password)}
               onChange={formik.handleChange}
               id={"password"}
               name={"password"}
