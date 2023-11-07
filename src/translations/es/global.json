@@ -36,7 +36,14 @@
   },
   "error": {
     "login": "Lo siento, tu nombre de usuario o contraseña es incorrecto. Por favor, inténtalo de nuevo.",
-    "register": "Lo siento, el nombre de usuario o el correo electrónico ya están en uso. Por favor, inténtalo de nuevo."
+    "register": "Lo siento, el nombre de usuario o el correo electrónico ya están en uso. Por favor, inténtalo de nuevo.",
+    "required": "Este campo es obligatorio.",
+    "email": "Por favor, introduce una dirección de correo electrónico válida.",
+    "password": "La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una letra minúscula, un numero y un caracter especial.",
+    "confirm-password": "Las contraseñas no coinciden.",
+    "name-length": "El nombre debe tener maximo 35 caracteres.",
+    "content-length": "El tweet debe tener maximo 240 caracteres.",
+    "max-images": "Solo puedes subir hasta 4 imagenes."
   },
   "input-params": {
     "username": "Nombre de usuario",
