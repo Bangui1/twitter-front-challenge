@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import logo from "../../../assets/logo.png";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
-import { useHttpRequestService } from "../../../service/HttpRequestService";
+import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
+import {useHttpRequestService} from "../../../service/HttpRequestService";
 import AuthWrapper from "../AuthWrapper";
 import LabeledInput from "../../../components/labeled-input/LabeledInput";
 import Button from "../../../components/button/Button";
-import { ButtonType } from "../../../components/button/StyledButton";
-import { StyledH3 } from "../../../components/common/text";
+import {ButtonSize, ButtonType} from "../../../components/button/StyledButton";
+import {StyledH3} from "../../../components/common/text";
 import {useFormik} from "formik";
 import {signInValidate} from "../../../util/validateForm";
 
@@ -79,13 +79,13 @@ const SignInPage = () => {
             <Button
               text={t("buttons.login")}
               buttonType={ButtonType.FOLLOW}
-              size={"MEDIUM"}
+              size={ButtonSize.MEDIUM}
               onClick={handleSubmit}
             />
             <Button
               text={t("buttons.register")}
               buttonType={ButtonType.OUTLINED}
-              size={"MEDIUM"}
+              size={ButtonSize.MEDIUM}
               onClick={() => navigate("/sign-up")}
             />
           </div>

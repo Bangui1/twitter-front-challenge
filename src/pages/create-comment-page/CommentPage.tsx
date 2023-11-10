@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { BackArrowIcon } from "../../components/icon/Icon";
+import React, {useEffect, useState} from "react";
+import {BackArrowIcon} from "../../components/icon/Icon";
 import Button from "../../components/button/Button";
-import { Post } from "../../service";
+import {Post} from "../../service";
 import AuthorData from "../../components/tweet/user-post-data/AuthorData";
 import ImageContainer from "../../components/tweet/tweet-image/ImageContainer";
-import { useLocation } from "react-router-dom";
-import { useHttpRequestService } from "../../service/HttpRequestService";
+import {useLocation} from "react-router-dom";
+import {useHttpRequestService} from "../../service/HttpRequestService";
 import TweetInput from "../../components/tweet-input/TweetInput";
 import ImageInput from "../../components/common/ImageInput";
-import { setLength, updateFeed } from "../../redux/user";
-import { useTranslation } from "react-i18next";
-import { ButtonType } from "../../components/button/StyledButton";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { StyledContainer } from "../../components/common/Container";
-import { StyledLine } from "../../components/common/Line";
-import { StyledP } from "../../components/common/text";
+import {setLength, updateFeed} from "../../redux/user";
+import {useTranslation} from "react-i18next";
+import {ButtonSize, ButtonType} from "../../components/button/StyledButton";
+import {useAppDispatch, useAppSelector} from "../../redux/hooks";
+import {StyledContainer} from "../../components/common/Container";
+import {StyledLine} from "../../components/common/Line";
+import {StyledP} from "../../components/common/text";
 
 const CommentPage = () => {
   const [content, setContent] = useState("");
@@ -69,7 +69,7 @@ const CommentPage = () => {
         <Button
           text={"Tweet"}
           buttonType={ButtonType.DEFAULT}
-          size={"SMALL"}
+          size={ButtonSize.SMALL}
           onClick={handleSubmit}
           disabled={content.length === 0}
         />

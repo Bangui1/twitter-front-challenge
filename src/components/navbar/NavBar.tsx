@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import NavItem from "./navItem/NavItem";
 import Button from "../button/Button";
-import { useLocation, useNavigate } from "react-router-dom";
-import { StyledTweetButton } from "../tweet-button/StyledTweetButton";
+import {useLocation, useNavigate} from "react-router-dom";
+import {StyledTweetButton} from "../tweet-button/StyledTweetButton";
 import TweetModal from "../tweet-modal/TweetModal";
-import { IconType, LogoIcon } from "../icon/Icon";
+import {IconType, LogoIcon} from "../icon/Icon";
 import Avatar from "../common/avatar/Avatar";
 import LogoutPrompt from "./logout-prompt/LogoutPrompt";
 import ThreeDots from "../common/ThreeDots";
-import { useTranslation } from "react-i18next";
-import { ButtonType } from "../button/StyledButton";
+import {useTranslation} from "react-i18next";
+import {ButtonSize, ButtonType} from "../button/StyledButton";
 import Icon from "../../assets/icon.jpg";
-import { useAppSelector } from "../../redux/hooks";
-import { StyledNavBarContainer } from "./NavBarContainer";
-import { StyledContainer } from "../common/Container";
-import { StyledIconContainer } from "./IconContainer";
-import { StyledNavItemsContainer } from "./navItem/NavItemsContainer";
-import { StyledP } from "../common/text";
+import {useAppSelector} from "../../redux/hooks";
+import {StyledNavBarContainer} from "./NavBarContainer";
+import {StyledContainer} from "../common/Container";
+import {StyledIconContainer} from "./IconContainer";
+import {StyledNavItemsContainer} from "./navItem/NavItemsContainer";
+import {StyledP} from "../common/text";
 import {useOutsideAlerter} from "../../hooks/useOutsideAlerter";
 
 const NavBar = () => {
@@ -77,7 +77,7 @@ const NavBar = () => {
         <StyledContainer width={"100%"}>
           <Button
             text={"Tweet"}
-            size={"180px"}
+            size={ButtonSize.MEDIUM}
             buttonType={ButtonType.DEFAULT}
             onClick={() => {
               setTweetModalOpen(true);

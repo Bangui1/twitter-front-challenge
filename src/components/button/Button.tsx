@@ -1,9 +1,9 @@
 import React, { MouseEventHandler } from "react";
-import { ButtonType, StyledButton } from "./StyledButton";
+import {ButtonSize, ButtonType, StyledButton} from "./StyledButton";
 
 interface ButtonProps {
   text: string;
-  size: string;
+  size: ButtonSize;
   buttonType: ButtonType;
   onClick?: MouseEventHandler;
   disabled?: boolean;

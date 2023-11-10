@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Button from "../button/Button";
-import { useHttpRequestService } from "../../service/HttpRequestService";
+import {useHttpRequestService} from "../../service/HttpRequestService";
 import UserDataBox from "../user-data-box/UserDataBox";
-import { useTranslation } from "react-i18next";
-import { ButtonType } from "../button/StyledButton";
-import { useAppSelector } from "../../redux/hooks";
+import {useTranslation} from "react-i18next";
+import {ButtonSize, ButtonType} from "../button/StyledButton";
+import {useAppSelector} from "../../redux/hooks";
 import "./FollowUserBox.css";
 import {StyledFollowUserBox} from "./StyledFollowUserBox";
 
@@ -49,7 +49,7 @@ const FollowUserBox = ({
       <Button
         text={isFollowing ? t("buttons.unfollow") : t("buttons.follow")}
         buttonType={isFollowing ? ButtonType.DELETE : ButtonType.FOLLOW}
-        size={"SMALL"}
+        size={ButtonSize.SMALL}
         onClick={handleFollow}
       />
     </StyledFollowUserBox>
