@@ -22,9 +22,7 @@ const HomePage = () => {
       const followers = await service.getFollowers(user.user.id);
       user.user.following = follows.map((follow: FollowDTO) => follow.followedId);
       user.user.followers = followers.map((follow: FollowDTO) => follow.followerId);
-      const data = await service.getPosts(query);
       dispatch(setUser(user.user));
-      dispatch(updateFeed(data));
     } catch (e) {
       navigate("/sign-in");
     }

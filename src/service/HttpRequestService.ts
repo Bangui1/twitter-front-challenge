@@ -184,8 +184,13 @@ const httpRequestService = {
       return res.data;
     }
   },
-  getPostsFromProfile: async (id: string) => {
-    const res = await api.get(`/post/by_user/${id}`);
+  getPostsFromProfile: async (id: string, limit: number, after: string) => {
+    const res = await api.get(`/post/by_user/${id}`, {
+        params: {
+            limit,
+            after,
+        },
+    });
 
     if (res.status === 200) {
       return res.data;
@@ -267,8 +272,13 @@ const httpRequestService = {
       return res.data;
     }
   },
-  getCommentsByPostId: async (id: string) => {
-    const res = await api.get(`/post/comment/${id}`);
+  getCommentsByPostId: async (id: string, limit: number, after: string) => {
+    const res = await api.get(`/post/comment/${id}`, {
+      params: {
+        limit,
+        after,
+      },
+    });
     if (res.status === 200) {
       return res.data;
     }
