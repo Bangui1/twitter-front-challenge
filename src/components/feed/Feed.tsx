@@ -7,9 +7,10 @@ import Loader from "../loader/Loader";
 interface FeedProps {
   posts: Post[];
   loading: boolean;
+  error: boolean;
 }
 
-const Feed = ({ posts, loading }: FeedProps) => {
+const Feed = ({ posts, loading , error}: FeedProps) => {
   return (
     <StyledContainer width={"100%"} alignItems={"center"}>
       {posts
@@ -19,7 +20,7 @@ const Feed = ({ posts, loading }: FeedProps) => {
         .map((post: Post) => (
           <Tweet key={post.id} post={post} />
         ))}
-      {loading && <Loader />}
+      {loading && !error && <Loader />}
     </StyledContainer>
   );
 };

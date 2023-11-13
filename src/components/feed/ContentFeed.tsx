@@ -3,8 +3,8 @@ import Feed from "./Feed";
 import { useGetFeed } from "../../hooks/useGetFeed";
 
 const ContentFeed = () => {
-  const { posts, loading } = useGetFeed();
+  const { posts, loading, error } = useGetFeed();
 
-  return <Feed posts={posts} loading={loading} />;
+  return <Feed posts={posts} loading={loading} error={error} />;
 };
 export default ContentFeed;

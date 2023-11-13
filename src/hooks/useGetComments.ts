@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 import { useHttpRequestService } from "../service/HttpRequestService";
-import { setLength, updateFeed } from "../redux/user";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import {Post} from "../service";
 
 interface UseGetCommentsProps {
   postId: string;
@@ -10,29 +9,46 @@ interface UseGetCommentsProps {
 export const useGetComments = ({ postId }: UseGetCommentsProps) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const posts = useAppSelector((state) => state.user.feed);
-
-  const dispatch = useAppDispatch();
-
+  const [lastCommentId, setLastCommentId] = useState<string>("");
+  const [posts, setPosts] = useState<Post[]>([]);
   const service = useHttpRequestService();
 
-  useEffect(() => {
+  function fetchComments() {
     try {
       setLoading(true);
-      setError(false);
-      service.getCommentsByPostId(postId).then((res) => {
+      service.getCommentsByPostId(postId, 3, lastCommentId).then((res) => {
         const updatedPosts = Array.from(new Set([...posts, ...res])).filter(
-          (post) => post.parentPostId === postId
+            (post) => post.parentPostId === postId
         );
-        dispatch(updateFeed(updatedPosts));
-        dispatch(setLength(updatedPosts.length));
+        setPosts(updatedPosts);
+        setLastCommentId(updatedPosts[updatedPosts.length - 1].id)
+        setError(res.length === 0)
         setLoading(false);
       });
     } catch (e) {
       setError(true);
       console.log(e);
     }
-  }, [postId]);
+  }
+
+  const handleScroll = useCallback(() => {
+    const { scrollTop, clientHeight, scrollHeight } =
+        document.documentElement;
+    if (scrollTop + clientHeight >= scrollHeight - 1) {
+      console.log("fetching");
+      fetchComments();
+    }
+  }, [loading]);
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [handleScroll])
+
 
   return { posts, loading, error };
 };
