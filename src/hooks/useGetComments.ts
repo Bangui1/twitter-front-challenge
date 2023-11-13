@@ -1,7 +1,5 @@
 import {useCallback, useEffect, useState} from "react";
 import { useHttpRequestService } from "../service/HttpRequestService";
-import { setLength, updateFeed } from "../redux/user";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import {Post} from "../service";
 
 interface UseGetCommentsProps {
@@ -13,9 +11,6 @@ export const useGetComments = ({ postId }: UseGetCommentsProps) => {
   const [error, setError] = useState(false);
   const [lastCommentId, setLastCommentId] = useState<string>("");
   const [posts, setPosts] = useState<Post[]>([]);
-
-  const dispatch = useAppDispatch();
-
   const service = useHttpRequestService();
 
   function fetchComments() {

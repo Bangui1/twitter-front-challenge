@@ -1,8 +1,7 @@
 import {useCallback, useEffect, useState} from "react";
 import { useHttpRequestService } from "../service/HttpRequestService";
-import { updateFeed } from "../redux/user";
 import { useParams } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { useAppDispatch } from "../redux/hooks";
 import {Post} from "../service";
 
 export const useGetProfilePosts = () => {
@@ -10,9 +9,9 @@ export const useGetProfilePosts = () => {
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState<Post[]>([]);
   const [lastPostId, setLastPostId] = useState<string>("");
-  const dispatch = useAppDispatch();
-  const id = useParams().id;
-  const service = useHttpRequestService();
+    useAppDispatch();
+    const id = useParams().id;
+    const service = useHttpRequestService();
 
   function fetchPosts() {
     if (!id) return;

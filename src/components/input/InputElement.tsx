@@ -1,7 +1,5 @@
-import styled from "styled-components";
 import {ChangeEvent, useRef, useState} from "react";
 import {InputType, StyledInputContainer} from "./StyledInputContainer";
-import {StyledInputTitle} from "../labeled-input/InputTitle";
 import {StyledInputElement} from "./StyledInputElement";
 import {StyledInputLabel} from "./StyledInputLabel";
 

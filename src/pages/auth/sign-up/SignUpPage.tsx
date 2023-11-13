@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import AuthWrapper from "../../../pages/auth/AuthWrapper";
 import {useHttpRequestService} from "../../../service/HttpRequestService";
-import LabeledInput from "../../../components/labeled-input/LabeledInput";
 import Button from "../../../components/button/Button";
 import {ButtonSize, ButtonType} from "../../../components/button/StyledButton";
 import {StyledH3} from "../../../components/common/text";
