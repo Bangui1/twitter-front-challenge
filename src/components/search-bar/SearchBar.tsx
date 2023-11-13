@@ -1,10 +1,10 @@
-import React, { ChangeEvent, useState } from "react";
+import React, {ChangeEvent, useState} from "react";
 import SearchResultModal from "./search-result-modal/SearchResultModal";
-import { Author } from "../../service";
-import { useHttpRequestService } from "../../service/HttpRequestService";
-import { useTranslation } from "react-i18next";
-import { StyledSearchBarContainer } from "./SearchBarContainer";
-import { StyledSearchBarInput } from "./SearchBarInput";
+import {Author} from "../../service";
+import {useHttpRequestService} from "../../service/HttpRequestService";
+import {useTranslation} from "react-i18next";
+import {StyledInputElement} from "../input/StyledInputElement";
+import {InputType, StyledInputContainer} from "../input/StyledInputContainer";
 
 export const SearchBar = () => {
   const [results, setResults] = useState<Author[]>([]);
@@ -29,13 +29,13 @@ export const SearchBar = () => {
   };
 
   return (
-    <StyledSearchBarContainer>
-      <StyledSearchBarInput
+    <StyledInputContainer inputType={InputType.SEARCH}>
+      <StyledInputElement
         onChange={handleChange}
         value={query}
         placeholder={t("placeholder.search")}
       />
       <SearchResultModal show={query.length > 0} results={results} />
-    </StyledSearchBarContainer>
+    </StyledInputContainer>
   );
 };

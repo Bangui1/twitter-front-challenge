@@ -1,16 +1,16 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from "react";
+import React, {ChangeEvent, useState} from "react";
 import Button from "../button/Button";
 import TweetInput from "../tweet-input/TweetInput";
-import { useHttpRequestService } from "../../service/HttpRequestService";
-import { setLength, updateFeed } from "../../redux/user";
+import {useHttpRequestService} from "../../service/HttpRequestService";
+import {setLength, updateFeed} from "../../redux/user";
 import ImageContainer from "../tweet/tweet-image/ImageContainer";
-import { BackArrowIcon } from "../icon/Icon";
+import {BackArrowIcon} from "../icon/Icon";
 import ImageInput from "../common/ImageInput";
-import { useTranslation } from "react-i18next";
-import { ButtonType } from "../button/StyledButton";
-import { StyledTweetBoxContainer } from "./TweetBoxContainer";
-import { StyledContainer } from "../common/Container";
-import { StyledButtonContainer } from "./ButtonContainer";
+import {useTranslation} from "react-i18next";
+import {ButtonSize, ButtonType} from "../button/StyledButton";
+import {StyledTweetBoxContainer} from "./TweetBoxContainer";
+import {StyledContainer} from "../common/Container";
+import {StyledButtonContainer} from "./ButtonContainer";
 import {useAppDispatch, useAppSelector} from "../../redux/hooks";
 
 interface TweetBoxProps {
@@ -82,7 +82,7 @@ const TweetBox = (
           <Button
             text={"Tweet"}
             buttonType={ButtonType.DEFAULT}
-            size={"SMALL"}
+            size={ButtonSize.SMALL}
             onClick={handleSubmit}
             disabled={content.length === 0}
           />
@@ -109,7 +109,7 @@ const TweetBox = (
             <Button
               text={"Tweet"}
               buttonType={ButtonType.DEFAULT}
-              size={"SMALL"}
+              size={ButtonSize.SMALL}
               onClick={handleSubmit}
               disabled={
                 content.length <= 0 ||

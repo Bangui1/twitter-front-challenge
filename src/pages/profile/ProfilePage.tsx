@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import ProfileInfo from "./ProfileInfo";
-import { useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import Modal from "../../components/modal/Modal";
-import { useTranslation } from "react-i18next";
-import { User } from "../../service";
-import { ButtonType } from "../../components/button/StyledButton";
-import { useAppSelector } from "../../redux/hooks";
-import { useHttpRequestService } from "../../service/HttpRequestService";
+import {useTranslation} from "react-i18next";
+import {User} from "../../service";
+import {ButtonSize, ButtonType} from "../../components/button/StyledButton";
+import {useAppSelector} from "../../redux/hooks";
+import {useHttpRequestService} from "../../service/HttpRequestService";
 import Button from "../../components/button/Button";
 import ProfileFeed from "../../components/feed/ProfileFeed";
-import { StyledContainer } from "../../components/common/Container";
-import { StyledH5 } from "../../components/common/text";
+import {StyledContainer} from "../../components/common/Container";
+import {StyledH5} from "../../components/common/text";
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState<User | null>(null);
@@ -141,7 +141,7 @@ const ProfilePage = () => {
                 />
                 <Button
                   buttonType={handleButtonType().component}
-                  size={"100px"}
+                  size={ButtonSize.MEDIUM}
                   onClick={handleButtonAction}
                   text={handleButtonType().text}
                 />
@@ -162,7 +162,7 @@ const ProfilePage = () => {
                 <Button
                   buttonType={modalValues.type}
                   text={modalValues.buttonText}
-                  size={"MEDIUM"}
+                  size={ButtonSize.MEDIUM}
                   onClick={handleSubmit}
                 />
               }

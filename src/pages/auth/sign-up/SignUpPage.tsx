@@ -1,15 +1,17 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import logo from "../../../assets/logo.png";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import {useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 import AuthWrapper from "../../../pages/auth/AuthWrapper";
-import { useHttpRequestService } from "../../../service/HttpRequestService";
+import {useHttpRequestService} from "../../../service/HttpRequestService";
 import LabeledInput from "../../../components/labeled-input/LabeledInput";
 import Button from "../../../components/button/Button";
-import { ButtonType } from "../../../components/button/StyledButton";
-import { StyledH3 } from "../../../components/common/text";
+import {ButtonSize, ButtonType} from "../../../components/button/StyledButton";
+import {StyledH3} from "../../../components/common/text";
 import {useFormik} from "formik";
 import {signUpValidate} from "../../../util/validateForm";
+import InputElement from "../../../components/input/InputElement";
+import {InputType} from "../../../components/input/StyledInputContainer";
 
 interface SignUpData {
   name: string;
@@ -59,7 +61,7 @@ const SignUpPage = () => {
             <StyledH3>{t("title.register")}</StyledH3>
           </div>
           <div className={"input-container"}>
-            <LabeledInput
+            <InputElement
               required
               placeholder={"Enter name..."}
               title={t("input-params.name")}
@@ -68,9 +70,9 @@ const SignUpPage = () => {
               id={"name"}
               name={"name"}
               value={formik.values.name}
-            />
+              inputType={InputType.DEFAULT}/>
             {formik.errors.name && formik.touched.name ? <p className={"error-message"}> {formik.errors.name}</p> : null}
-            <LabeledInput
+            <InputElement
               required
               placeholder={"Enter username..."}
               title={t("input-params.username")}
@@ -79,9 +81,10 @@ const SignUpPage = () => {
               id={"username"}
               name={"username"}
               value={formik.values.username}
+              inputType={InputType.DEFAULT}
             />
             {formik.errors.username && formik.touched.username ? <p className={"error-message"}> {formik.errors.username}</p> : null}
-            <LabeledInput
+            <InputElement
               required
               placeholder={"Enter email..."}
               title={t("input-params.email")}
@@ -90,9 +93,10 @@ const SignUpPage = () => {
               id={"email"}
               name={"email"}
               value={formik.values.email}
+              inputType={InputType.DEFAULT}
             />
             {formik.errors.email && formik.touched.email ? <p className={"error-message"}> {formik.errors.email}</p> : null}
-            <LabeledInput
+            <InputElement
               type="password"
               required
               placeholder={"Enter password..."}
@@ -102,9 +106,10 @@ const SignUpPage = () => {
               id={"password"}
               name={"password"}
               value={formik.values.password}
+              inputType={InputType.DEFAULT}
             />
             {formik.errors.password && formik.touched.password ? <p className={"error-message"}> {formik.errors.password}</p> : null}
-            <LabeledInput
+            <InputElement
               type="password"
               required
               placeholder={"Confirm password..."}
@@ -114,6 +119,7 @@ const SignUpPage = () => {
               id={"confirmPassword"}
               name={"confirmPassword"}
               value={formik.values.confirmPassword}
+              inputType={InputType.DEFAULT}
             />
             {formik.errors.confirmPassword && formik.touched.confirmPassword ? <p className={"error-message"}> {formik.errors.confirmPassword}</p> : null}
             <p className={"error-message"}>{error && t("error.register")}</p>
@@ -122,13 +128,13 @@ const SignUpPage = () => {
             <Button
               text={t("buttons.register")}
               buttonType={ButtonType.FOLLOW}
-              size={"MEDIUM"}
+              size={ButtonSize.MEDIUM}
               onClick={handleSubmit}
             />
             <Button
               text={t("buttons.login")}
               buttonType={ButtonType.OUTLINED}
-              size={"MEDIUM"}
+              size={ButtonSize.MEDIUM}
               onClick={() => navigate("/sign-in")}
             />
           </div>
