@@ -21,13 +21,13 @@ export const useGetComments = ({ postId }: UseGetCommentsProps) => {
   function fetchComments() {
     try {
       setLoading(true);
-      setError(false);
       service.getCommentsByPostId(postId, 3, lastCommentId).then((res) => {
         const updatedPosts = Array.from(new Set([...posts, ...res])).filter(
             (post) => post.parentPostId === postId
         );
         setPosts(updatedPosts);
         setLastCommentId(updatedPosts[updatedPosts.length - 1].id)
+        setError(res.length === 0)
         setLoading(false);
       });
     } catch (e) {

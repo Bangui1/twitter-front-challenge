@@ -3,11 +3,11 @@ import Feed from "./Feed";
 import { useGetProfilePosts } from "../../hooks/useGetProfilePosts";
 
 const ProfileFeed = () => {
-  const { posts, loading } = useGetProfilePosts();
+  const { posts, loading , error} = useGetProfilePosts();
 
   return (
     <>
-      <Feed posts={posts} loading={loading} />
+      <Feed posts={posts} loading={loading} error={error}/>
     </>
   );
 };

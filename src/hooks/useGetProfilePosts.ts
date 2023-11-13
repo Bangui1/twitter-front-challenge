@@ -17,7 +17,6 @@ export const useGetProfilePosts = () => {
   function fetchPosts() {
     if (!id) return;
     setLoading(true);
-    setError(false);
     service
         .getPostsFromProfile(id, 4, lastPostId)
         .then((res) => {
@@ -26,6 +25,7 @@ export const useGetProfilePosts = () => {
           );
           setPosts(updatedPosts);
           setLastPostId(updatedPosts[updatedPosts.length - 1].id);
+          setError(res.length === 0)
           setLoading(false);
         })
         .catch(() => {

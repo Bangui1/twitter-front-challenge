@@ -18,12 +18,12 @@ export const useGetFeed = () => {
   function fetchPosts() {
     try {
       setLoading(true);
-      setError(false);
       service.getPaginatedPosts(4, lastPostId, query).then((res) => {
         const updatedPosts = Array.from(new Set([...posts, ...res]));
         dispatch(updateFeed(updatedPosts));
         dispatch(setLength(updatedPosts.length));
         setLastPostId(updatedPosts[updatedPosts.length - 1].id);
+        setError(res.length === 0)
         setLoading(false);
       });
     } catch (e) {
