@@ -1,7 +1,7 @@
-import React, { ChangeEvent, useRef, useState } from "react";
-import { StyledInputContainer } from "./InputContainer";
-import { StyledInputTitle } from "./InputTitle";
-import { StyledInputElement } from "./StyledInputElement";
+import React, {ChangeEvent, useRef, useState} from "react";
+import {InputType, StyledInputContainer} from "../input/StyledInputContainer";
+import {StyledInputTitle} from "./InputTitle";
+import {StyledInputElement} from "./StyledInputElement";
 
 interface InputWithLabelProps {
   type?: "password" | "text";
@@ -47,6 +47,7 @@ const LabeledInput = ({
     <StyledInputContainer
       className={`${error ? "error" : ""}`}
       onClick={handleClick}
+      inputType={InputType.DEFAULT}
     >
       <StyledInputTitle
         className={`${focus ? "active-label" : ""} ${error ? "error" : ""}`}

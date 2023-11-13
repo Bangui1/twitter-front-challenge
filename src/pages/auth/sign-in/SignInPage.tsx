@@ -4,12 +4,13 @@ import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
 import {useHttpRequestService} from "../../../service/HttpRequestService";
 import AuthWrapper from "../AuthWrapper";
-import LabeledInput from "../../../components/labeled-input/LabeledInput";
 import Button from "../../../components/button/Button";
 import {ButtonSize, ButtonType} from "../../../components/button/StyledButton";
 import {StyledH3} from "../../../components/common/text";
 import {useFormik} from "formik";
 import {signInValidate} from "../../../util/validateForm";
+import InputElement from "../../../components/input/InputElement";
+import {InputType} from "../../../components/input/StyledInputContainer";
 
 
 interface SignInValues {
@@ -50,7 +51,7 @@ const SignInPage = () => {
             <StyledH3>{t("title.login")}</StyledH3>
           </div>
           <div className={"input-container"}>
-            <LabeledInput
+            <InputElement
               required
               placeholder={"Enter email..."}
               title={t("input-params.email")}
@@ -59,9 +60,9 @@ const SignInPage = () => {
               id={"email"}
               name={"email"}
               value={formik.values.email}
-            />
+             inputType={InputType.DEFAULT}/>
               {formik.errors.email && formik.touched.email ? <p className={"error-message"}>{formik.errors.email}</p> : null}
-            <LabeledInput
+            <InputElement
               type="password"
               required
               placeholder={"Enter password..."}
@@ -71,7 +72,7 @@ const SignInPage = () => {
               id={"password"}
               name={"password"}
               value={formik.values.password}
-            />
+             inputType={InputType.DEFAULT}/>
               {formik.errors.password && formik.touched.password ? <p className={"error-message"}>{formik.errors.password}</p> : null}
             <p className={"error-message"}>{error && t("error.login")}</p>
           </div>

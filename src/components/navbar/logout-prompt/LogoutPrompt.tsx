@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {MutableRefObject, useEffect, useState} from "react";
 import Modal from "../../modal/Modal";
 import logo from "../../../assets/logo.png";
 import Button from "../../button/Button";
@@ -14,7 +14,7 @@ import {useOutsideAlerter} from "../../../hooks/useOutsideAlerter";
 
 interface LogoutPromptProps {
   show: boolean;
-  alerter: any;
+  alerter: MutableRefObject<HTMLElement | null>;
 }
 
 const LogoutPrompt = ({ show , alerter }: LogoutPromptProps) => {
