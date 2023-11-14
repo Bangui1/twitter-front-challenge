@@ -7,6 +7,7 @@ import { StyledP } from "../../common/text";
 import { StyledLine } from "../../common/Line";
 import TweetBox from "../../tweet-box/TweetBox";
 import ImageContainer from "../../tweet/tweet-image/ImageContainer";
+import {createPortal} from "react-dom";
 
 interface CommentModalProps {
   post: Post;
@@ -14,7 +15,7 @@ interface CommentModalProps {
   onClose: () => void;
 }
 const CommentModal = ({ post, show, onClose }: CommentModalProps) => {
-  return (
+  return createPortal(
     <PostModal show={show} onClose={onClose}>
       <StyledContainer gap={"16px"}>
         <AuthorData
@@ -34,7 +35,7 @@ const CommentModal = ({ post, show, onClose }: CommentModalProps) => {
         <TweetBox parentId={post.id} close={onClose} />
       </StyledContainer>
     </PostModal>
-  );
+  , document.body);
 };
 
 export default CommentModal;

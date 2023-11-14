@@ -20,8 +20,13 @@ export const useGetComments = ({ postId }: UseGetCommentsProps) => {
         const updatedPosts = Array.from(new Set([...posts, ...res])).filter(
             (post) => post.parentPostId === postId
         );
+        if (updatedPosts.length === posts.length) {
+          setError(true);
+          setLoading(false);
+          return;
+        }
         setPosts(updatedPosts);
-        setLastCommentId(updatedPosts[updatedPosts.length - 1].id)
+        setLastCommentId(!updatedPosts[updatedPosts.length - 1].id ? "" : updatedPosts[updatedPosts.length - 1].id)
         setError(res.length === 0)
         setLoading(false);
       });

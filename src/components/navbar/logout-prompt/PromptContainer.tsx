@@ -14,7 +14,9 @@ export const StyledPromptContainer = styled.div`
   border-radius: 16px;
   border: 1px solid ${(props) => props.theme.colors.containerLine};
   position: absolute;
-  top: -300%;
+  top: 70%;
+  left: 15%;
+  z-index: 3;
   transition: 0.3s ease-in-out;
 
   &:hover {

@@ -7,6 +7,7 @@ const StyledSwitchContainer = styled.div`
   display: inline-block;
   width: 60px;
   height: 30px;
+  z-index: 3;
 `;
 
 const StyledInput = styled.input`

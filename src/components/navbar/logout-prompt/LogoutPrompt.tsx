@@ -10,20 +10,20 @@ import {useAppSelector} from "../../../redux/hooks";
 import {StyledPromptContainer} from "./PromptContainer";
 import {StyledContainer} from "../../common/Container";
 import {StyledP} from "../../common/text";
-import {useOutsideAlerter} from "../../../hooks/useOutsideAlerter";
+import {createPortal} from "react-dom";
+import {StyledModalContainer} from "../../modal/ModalContainer";
 
 interface LogoutPromptProps {
   show: boolean;
-  alerter: MutableRefObject<HTMLElement | null>;
+  alerter: MutableRefObject<HTMLDivElement | null>;
 }
 
-const LogoutPrompt = ({ show , alerter }: LogoutPromptProps) => {
+const LogoutPrompt = ({ show, alerter }: LogoutPromptProps) => {
   const [showPrompt, setShowPrompt] = useState<boolean>(show);
   const [showModal, setShowModal] = useState<boolean>(false);
   const user = useAppSelector((state) => state.user.user);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
-  const ref = useOutsideAlerter({onOutsideClick: () => setShowPrompt(false)})
   const handleClick = () => {
     setShowModal(true);
   };
@@ -45,11 +45,12 @@ const LogoutPrompt = ({ show , alerter }: LogoutPromptProps) => {
     setShowPrompt(show);
   }, [show]);
 
-  return (
+  return createPortal(
     <>
       {showPrompt && (
-        <StyledPromptContainer ref={ref}>
+        <StyledPromptContainer ref={alerter}>
           <StyledContainer
+              zIndex={3}
             flexDirection={"row"}
             gap={"16px"}
             borderBottom={"1px solid #ebeef0"}
@@ -62,7 +63,7 @@ const LogoutPrompt = ({ show , alerter }: LogoutPromptProps) => {
               onChange={handleLanguageChange}
             />
           </StyledContainer>
-          <StyledContainer onClick={handleClick} alignItems={"center"}>
+          <StyledContainer onClick={handleClick} alignItems={"center"} zIndex={3}>
             <StyledP primary>{`${t("buttons.logout")} @${
               user.username
             }`}</StyledP>
@@ -85,7 +86,7 @@ const LogoutPrompt = ({ show , alerter }: LogoutPromptProps) => {
         onClose={() => setShowModal(false)}
       />
     </>
-  );
+      , document.body);
 };
 
 export default LogoutPrompt;
