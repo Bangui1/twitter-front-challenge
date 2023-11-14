@@ -9,6 +9,7 @@ import {ButtonSize, ButtonType} from "../../button/StyledButton";
 import {useAppDispatch, useAppSelector} from "../../../redux/hooks";
 import {Post} from "../../../service";
 import {StyledDeletePostModalContainer} from "./DeletePostModalContainer";
+import {useOutsideAlerter} from "../../../hooks/useOutsideAlerter";
 
 interface DeletePostModalProps {
   show: boolean;
@@ -49,7 +50,8 @@ export const DeletePostModal = ({
     <>
       {show && (
         <>
-          <StyledDeletePostModalContainer onClick={() => setShowModal(true)}>
+          <StyledDeletePostModalContainer ref={alerter}
+              onClick={() => setShowModal(true)}>
             <DeleteIcon />
             <p>{t("buttons.delete")}</p>
           </StyledDeletePostModalContainer>
