@@ -55,6 +55,8 @@ export const DeletePostModal = ({
             <DeleteIcon />
             <p>{t("buttons.delete")}</p>
           </StyledDeletePostModalContainer>
+          </>
+      )}
           <Modal
             title={t("modal-title.delete-post") + "?"}
             text={t("modal-content.delete-post")}
@@ -69,8 +71,6 @@ export const DeletePostModal = ({
               />
             }
           />
-        </>
-      )}
     </>
   );
 };
