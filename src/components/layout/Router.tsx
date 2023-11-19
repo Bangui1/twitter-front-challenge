@@ -1,4 +1,3 @@
-import React from "react";
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import { StyledSideBarPageWrapper } from "../../pages/side-bar-page/SideBarPageWrapper";
 import NavBar from "../navbar/NavBar";
@@ -11,6 +10,8 @@ import TweetPage from "../../pages/create-tweet-page/TweetPage";
 import CommentPage from "../../pages/create-comment-page/CommentPage";
 import PostPage from "../../pages/post-page/PostPage";
 import ProtectedRouter from "./ProtectedRouter";
+import MessagesPage from "../../pages/message-page/MessagesPage";
+import ChatPage from "../../pages/chat-page/ChatPage";
 
 const WithNav = () => {
   return (
@@ -60,6 +61,14 @@ export const ROUTER = createBrowserRouter([
             path: "/post/:id",
             element: <CommentPage/>,
           },
+          {
+            path: "/messages",
+            element: <MessagesPage/>
+          },
+          {
+            path: "/messages/:id",
+            element: <ChatPage/>
+          }
         ],
       },
     ],

@@ -64,6 +64,15 @@ const NavBar = () => {
             selectedIcon={IconType.ACTIVE_PROFILE}
             active={location.pathname === `/profile/${user.id}`}
           />
+          <NavItem
+              title={t("navbar.message")}
+              icon={IconType.MESSAGE}
+              selectedIcon={IconType.ACTIVE_MESSAGE}
+              onClick={() => {
+                navigate("/messages");
+              }}
+              active={location.pathname === `/messages`}
+          />
           <StyledTweetButton
             onClick={() =>
               window.innerWidth > 600

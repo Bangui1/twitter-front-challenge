@@ -60,12 +60,12 @@ export interface User {
 }
 
 export interface MessageDTO {
-  id: string;
+  id?: string;
   content: string;
   createdAt: Date;
   chatId: string;
   senderId: string;
-  sender: Author;
+  sender?: Author;
 }
 
 export interface ChatDTO {
@@ -78,4 +78,17 @@ export interface FollowDTO {
   id: string;
   followerId: string;
   followedId: string;
+}
+
+export interface Chatroom {
+    id: string;
+    users: Author[];
+    lastMessage: Message;
+}
+
+export interface Message {
+    content: string;
+    createdAt: Date;
+    chatroomId: string;
+    senderId: string;
 }
