@@ -41,6 +41,7 @@ const MessagesPage = () => {
 
     useEffect(() => {
         socket.connect();
+        socket.emit("chatrooms")
         socket.on("recieve_message", (message: Message) => {
             handleNewMessage(message);
         });

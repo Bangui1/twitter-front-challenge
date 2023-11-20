@@ -1,6 +1,6 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {Author, ChatDTO, MessageDTO} from "../../service";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useHttpRequestService} from "../../service/HttpRequestService";
 import {io} from "socket.io-client";
 import {useAppSelector} from "../../redux/hooks";
@@ -22,9 +22,10 @@ interface MessageValues{
 
 const ChatPage = () => {
     const [chat, setChat] = useState<ChatDTO | null>(null);
+    const [friend, setFriend] = useState<Author | null>(null);
+    const messagesRef = useRef<HTMLDivElement>(null)
     const service = useHttpRequestService();
     const id = useParams().id;
-    const [friend, setFriend] = useState<Author | null>(null);
     const user = useAppSelector((state) => state.user.user);
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -77,6 +78,7 @@ const ChatPage = () => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         socket.connect();
+        socket.emit("chatroom", {chatroomId: id});
         socket.on(`recieve_message`, (message: MessageDTO) => {
             if(message.senderId !== user.id) {
                 console.log(message);
@@ -90,6 +92,13 @@ const ChatPage = () => {
             socket.disconnect();
         };
     }, []);
+
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useEffect(() => {
+        if (messagesRef.current) {
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+        }
+    }, [chat?.messages]);
 
 
     return (
@@ -115,6 +124,7 @@ const ChatPage = () => {
                 gap={"10px"}
                 overflow={"auto"}
                 height={"100vh"}
+                ref={messagesRef}
             >
                 {chat?.messages.map((message: MessageDTO) => {
                     return (
