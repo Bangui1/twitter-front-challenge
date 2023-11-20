@@ -36,10 +36,18 @@ const MessagesPage = () => {
         }
     });
 
-    socket.on("message", (message: Message) => {
-        handleNewMessage(message);
-    });
 
+
+
+    useEffect(() => {
+        socket.connect();
+        socket.on("recieve_message", (message: Message) => {
+            handleNewMessage(message);
+        });
+        return () => {
+            socket.disconnect();
+        }
+    }, []);
 
     useEffect(() => {
         getChatrooms();
