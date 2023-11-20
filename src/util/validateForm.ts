@@ -24,3 +24,7 @@ export const postValidate = yup.object().shape({
     content: yup.string().required(i18next.t('error.required')).max(240, i18next.t('error.content-length')),
     images: yup.array().max(4, i18next.t('error.max-images'))
 })
+
+export const chatMessageValidate = yup.object().shape({
+    content: yup.string().required(i18next.t('error.required')).max(240, i18next.t('error.content-length'))
+})
