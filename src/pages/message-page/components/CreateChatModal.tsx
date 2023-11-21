@@ -30,7 +30,6 @@ const CreateChatModal = ({ onClose, show }: CreateChatModalProps) => {
         service.getFollowing(user.id).then((res) => {
             res.map((follow: FollowDTO) => {
                 service.getProfile(follow.followedId).then((res) => {
-                    console.log(res)
                     setUsers((users) => [...users, res])
                 })
             })
@@ -39,7 +38,6 @@ const CreateChatModal = ({ onClose, show }: CreateChatModalProps) => {
 
     const handleClick = (id: string) => {
         service.createChat(id).then((res) => {
-            console.log(res)
             navigate(`/messages/${res.id}`)
         })
     }

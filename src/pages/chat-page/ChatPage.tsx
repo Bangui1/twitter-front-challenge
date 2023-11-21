@@ -81,7 +81,6 @@ const ChatPage = () => {
         socket.emit("chatroom", {chatroomId: id});
         socket.on(`recieve_message`, (message: MessageDTO) => {
             if(message.senderId !== user.id) {
-                console.log(message);
                 setChat(prevChat => ({
                     ...prevChat!,
                     messages: [...prevChat?.messages ?? [], message]
