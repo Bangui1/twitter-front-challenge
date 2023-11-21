@@ -53,8 +53,9 @@ const httpRequestService = {
   },
   createPost: async (data: PostData) => {
     const postData = {
-      ...data,
+      content: data.content,
       images: data.images?.map((image) => image.name),
+      parentPostId: data.parentId,
     };
     console.log(postData)
     const res = await api.post(`/post`, postData);

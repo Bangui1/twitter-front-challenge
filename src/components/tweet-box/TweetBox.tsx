@@ -44,7 +44,7 @@ const TweetBox = (
   };
   const handleSubmit = async () => {
     try {
-      await httpService.createPost({content, images});
+      await httpService.createPost({content, images, parentId});
       setContent("");
       setImages([]);
       setImagesPreview([]);
