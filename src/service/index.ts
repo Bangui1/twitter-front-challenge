@@ -57,6 +57,7 @@ export interface User {
   followers: Author[];
   following: Author[];
   posts: Post[];
+  followsMe?: boolean;
 }
 
 export interface MessageDTO {
@@ -91,4 +92,9 @@ export interface Message {
     createdAt: Date;
     chatroomId: string;
     senderId: string;
+}
+
+export interface ProfileDTO {
+  user: User;
+  follows: boolean;
 }

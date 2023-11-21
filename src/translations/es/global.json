@@ -25,7 +25,8 @@
     "delete": "Eliminar",
     "unfollow": "Dejar de seguir",
     "cancel": "Cancelar",
-    "logout": "Cerrar sesión"
+    "logout": "Cerrar sesión",
+    "new-chat": "Nuevo chat"
   },
   "placeholder": {
     "new-chat": "Comenzar un nuevo chat",

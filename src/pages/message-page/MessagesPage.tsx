@@ -8,6 +8,7 @@ import {StyledContainer} from "../../components/common/Container";
 import {StyledH5} from "../../components/common/text";
 import {useTranslation} from "react-i18next";
 import {io} from "socket.io-client";
+import CreateChatButton from "./components/CreateChatButton";
 
 
 const MessagesPage = () => {
@@ -65,8 +66,11 @@ const MessagesPage = () => {
                 borderBottom={"1px solid #ebeef0"}
                 maxHeight={"60px"}
                 padding={"16px"}
+                flex-direction={"row"}
+                justifyContent={"space-between"}
             >
                 <StyledH5>{t("header.messages")}</StyledH5>
+                <CreateChatButton />
             </StyledContainer>
             <StyledContainer
                 padding={"16px"}

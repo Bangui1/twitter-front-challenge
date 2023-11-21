@@ -236,11 +236,9 @@ const httpRequestService = {
 
   createChat: async (id: string) => {
     const res = await api.post(
-      `/chat`,
-      {
-        users: [id],
-      });
-    if (res.status === 201) {
+      `/chat/chatroom/${id}`,
+    );
+    if (res.status === 200) {
       return res.data;
     }
   },
