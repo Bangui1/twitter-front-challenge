@@ -1,7 +1,8 @@
-import {ChangeEvent, useRef, useState} from "react";
+import React, {ChangeEvent, useRef, useState} from "react";
 import {InputType, StyledInputContainer} from "./StyledInputContainer";
 import {StyledInputElement} from "./StyledInputElement";
 import {StyledInputLabel} from "./StyledInputLabel";
+import {ChatIcon} from "../icon/Icon";
 
 
 interface InputElementProps {
@@ -15,6 +16,7 @@ interface InputElementProps {
     name: string;
     value: string;
     inputType: InputType;
+    onSubmit?: () => void;
 }
 
 const InputElement = ({
@@ -28,6 +30,7 @@ const InputElement = ({
     name,
     value,
     inputType,
+    onSubmit,
 }: InputElementProps) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [focus, setFocus] = useState(false);
@@ -70,6 +73,7 @@ const InputElement = ({
                 ref={inputRef}
                 className={`${focus ? "active-div" : ""} ${error ? "error" : ""}`}
             />
+            {onSubmit && <ChatIcon onClick={onSubmit}/>}
         </StyledInputContainer>
     );
 }

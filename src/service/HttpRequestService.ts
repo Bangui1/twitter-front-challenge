@@ -53,8 +53,9 @@ const httpRequestService = {
   },
   createPost: async (data: PostData) => {
     const postData = {
-      ...data,
+      content: data.content,
       images: data.images?.map((image) => image.name),
+      parentPostId: data.parentId,
     };
     console.log(postData)
     const res = await api.post(`/post`, postData);
@@ -236,11 +237,9 @@ const httpRequestService = {
 
   createChat: async (id: string) => {
     const res = await api.post(
-      `/chat`,
-      {
-        users: [id],
-      });
-    if (res.status === 201) {
+      `/chat/chatroom/${id}`,
+    );
+    if (res.status === 200) {
       return res.data;
     }
   },
@@ -293,6 +292,25 @@ const httpRequestService = {
     const res = await api.get(`/follower/followers/${id}`);
     if (res.status === 200) {
       return res.data;
+    }
+  },
+  createChatroom: async (id: string) => {
+    const res = await api.post(`/chat/chatroom/${id}`);
+    if (res.status === 200){
+        return res.data;
+    }
+  },
+  getChatrooms: async () => {
+    const res = await api.get(`/chat/chatroom/chats`);
+    console.log(res.data)
+    if (res.status === 200){
+        return res.data;
+    }
+  },
+  getChatData: async (id: string) => {
+    const res = await api.get(`/chat/chatroom/${id}`);
+    if (res.status === 200){
+        return res.data;
     }
   }
 };

@@ -4,6 +4,7 @@ import styled, {CSSObject} from "styled-components";
 export enum InputType {
     DEFAULT = "DEFAULT",
     SEARCH = "SEARCH",
+    CHAT = "CHAT",
 }
 
 export interface InputContainerProps {
@@ -53,6 +54,20 @@ const getInputTypeCss = (containerType: InputType, props: any) : CSSObject => {
                         //transform: translateX(39px); /* Adjust the value based on the width difference */
                     },
                 },
+            };
+        case InputType.CHAT:
+            return {
+                display: "flex",
+                "max-width": `${props.short ? "400px" : "100%"}`,
+                width: "100%",
+                "align-items": "flex-start",
+                "justify-content": "flex-start",
+                "flex-direction": "row",
+                transition: "0.3s ease-in-out",
+                "box-sizing": "border-box",
+                background: props.theme.colors.inactiveBackground,
+                "border-radius": "30px",
+                padding: "16px",
             };
     }
 }

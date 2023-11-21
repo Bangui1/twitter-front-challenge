@@ -10,4 +10,5 @@ export const StyledInputElement = styled.input`
   font-size: 16px;
   background: none;
   margin-left: 6px;
+  flex-grow: 1;
 `;

@@ -8,7 +8,8 @@
   },
   "navbar": {
     "home": "Home",
-    "profile": "Profile"
+    "profile": "Profile",
+    "message": "Messages"
   },
   "suggestion": {
     "who-to-follow": "Who to follow",
@@ -23,7 +24,8 @@
     "delete": "Delete",
     "unfollow": "Unfollow",
     "cancel": "Cancel",
-    "logout": "Log out"
+    "logout": "Log out",
+    "new-chat": "New chat"
   },
   "placeholder": {
     "new-chat": "Start a new chat",

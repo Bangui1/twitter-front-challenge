@@ -3,6 +3,7 @@ import { StyledBlurredBackground } from "../common/BlurredBackground";
 import { ModalCloseButton } from "../common/ModalCloseButton";
 import { StyledTweetModalContainer } from "../tweet-modal/TweetModalContainer";
 import {useOutsideAlerter} from "../../hooks/useOutsideAlerter";
+import {createPortal} from "react-dom";
 
 interface PostModalProps {
   onClose: () => void;
@@ -12,7 +13,7 @@ interface PostModalProps {
 
 export const PostModal = ({ onClose, show, children }: PostModalProps) => {
   const ref = useOutsideAlerter({onOutsideClick: onClose})
-  return (
+  return createPortal(
     <>
       {show && (
         <StyledBlurredBackground>
@@ -23,5 +24,5 @@ export const PostModal = ({ onClose, show, children }: PostModalProps) => {
         </StyledBlurredBackground>
       )}
     </>
-  );
+  , document.body);
 };
