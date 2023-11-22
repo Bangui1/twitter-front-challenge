@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {CSSObject} from "styled-components";
 
 export enum ChatBubbleType {
     SENT = "SENT",
@@ -22,7 +22,7 @@ export const StyledChatBubble = styled.div<ChatBubbleProps>`
   color: ${(props) => props.theme.colors.white};
 `;
 
-const getChatBubbleStyle = (props: any) => {
+const getChatBubbleStyle = (props: any) : CSSObject => {
     switch (props.chatBubbleType) {
         case ChatBubbleType.SENT:
             return {

@@ -35,7 +35,7 @@ export const useGetFeed = () => {
   const handleScroll = useCallback(() => {
     const { scrollTop, clientHeight, scrollHeight } =
         document.documentElement;
-    if (scrollTop + clientHeight >= scrollHeight - 1) {
+    if (scrollTop + clientHeight >= scrollHeight - 3) {
       console.log("fetching");
       console.log(query)
       fetchPosts();

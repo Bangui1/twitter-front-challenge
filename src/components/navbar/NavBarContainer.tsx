@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ThreeDots from "../common/ThreeDots";
 
 export const StyledNavBarContainer = styled.div`
   display: flex;
@@ -26,7 +27,6 @@ export const StyledNavBarContainer = styled.div`
 
   @media (max-width: 600px) {
     background: ${(props) => props.theme.background};
-    max-height: 48px;
     flex-direction: row;
     position: fixed;
     bottom: 0;
@@ -36,9 +36,15 @@ export const StyledNavBarContainer = styled.div`
     justify-content: center;
     padding: 0;
     margin-left: 0;
-
+    top: 92%;
     .icon {
       display: none;
     }
   }
 `;
+
+export const NavBarLittleDots = styled(ThreeDots)`
+    @media (max-width: 600px) {
+        display: none;
+    }
+    `;

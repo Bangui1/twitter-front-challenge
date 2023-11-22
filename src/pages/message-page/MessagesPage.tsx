@@ -18,12 +18,20 @@ const MessagesPage = () => {
     const user = useAppSelector((state) => state.user.user);
 
     const handleNewMessage = (message: Message) => {
-        const chatroom = chatrooms.find((chatroom) => chatroom.id === message.chatroomId);
-        if (chatroom) {
-            chatroom.lastMessage = message;
-            setChatrooms([...chatrooms]);
-        }
+        setChatrooms((prevChatrooms) => {
+            const updatedChatrooms = prevChatrooms.map((chatroom) => {
+                if (chatroom.id === message.chatroomId) {
+                    return {
+                        ...chatroom,
+                        lastMessage: message,
+                    };
+                }
+                return chatroom;
+            });
+            return updatedChatrooms;
+        });
     };
+
 
     const getChatrooms = () => {
         service.getChatrooms().then((res) => {
@@ -44,6 +52,7 @@ const MessagesPage = () => {
         socket.connect();
         socket.emit("chatrooms")
         socket.on("recieve_message", (message: Message) => {
+            console.log(message);
             handleNewMessage(message);
         });
         return () => {

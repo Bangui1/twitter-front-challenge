@@ -14,6 +14,8 @@ import {useFormik} from "formik";
 import ChatMessage from "./components/ChatMessage";
 import {StyledP} from "../../components/common/text";
 import {chatMessageValidate} from "../../util/validateForm";
+import {BackArrowIcon, ProfileIcon} from "../../components/icon/Icon";
+import {StyledMessageContainer} from "./components/StyledMessageContainer";
 
 
 interface MessageValues{
@@ -69,13 +71,11 @@ const ChatPage = () => {
         });
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         getChat();
     }, []);
 
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         socket.connect();
         socket.emit("chatroom", {chatroomId: id});
@@ -92,7 +92,6 @@ const ChatPage = () => {
         };
     }, []);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         if (messagesRef.current) {
             messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
@@ -101,15 +100,21 @@ const ChatPage = () => {
 
 
     return (
-        <StyledContainer
+        <StyledMessageContainer
             borderRight={"1px solid #ebeef0"}
             flex={2}
             maxWidth={"700px"}
+            paddingTop={"12px"}
         >
+            <BackArrowIcon
+                onClick={() => navigate("/messages")}
+                height={"50px"}
+
+            />
             <StyledContainer
                 borderBottom={"1px solid #ebeef0"}
                 padding={"16px"}
-                maxHeight={"175px"}
+                maxHeight={"150px"}
                 onClick={() => { navigate(`/profile/${friend?.id}`) }}
             >
                 <ProfileInfo
@@ -143,7 +148,8 @@ const ChatPage = () => {
                 inputType={InputType.CHAT}
                 onSubmit={formik.handleSubmit}
             />
-        </StyledContainer>
+            {formik.errors.content && formik.touched.content ? <StyledP primary={false} className={"error-message"}>{t('error.message-size')}</StyledP> : null}
+        </StyledMessageContainer>
     )
 }
 

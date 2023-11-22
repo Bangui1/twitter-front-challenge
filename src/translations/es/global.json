@@ -44,7 +44,8 @@
     "confirm-password": "Las contraseñas no coinciden.",
     "name-length": "El nombre debe tener maximo 35 caracteres.",
     "content-length": "El tweet debe tener maximo 240 caracteres.",
-    "max-images": "Solo puedes subir hasta 4 imagenes."
+    "max-images": "Solo puedes subir hasta 4 imagenes.",
+    "message-size": "El mensaje debe tener maximo 240 caracteres."
   },
   "input-params": {
     "username": "Nombre de usuario",

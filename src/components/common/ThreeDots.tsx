@@ -2,9 +2,9 @@ import React from "react";
 import { StyledContainer } from "./Container";
 import { StyledDot } from "./Dot";
 
-const ThreeDots = ({ onClick }: { onClick: () => void }) => {
+const ThreeDots = ({ onClick, className }: { onClick: () => void, className?: string }) => {
   return (
-    <StyledContainer
+    <StyledContainer className={className}
       flexDirection={"row"}
       gap={"2px"}
       alignItems={"center"}
