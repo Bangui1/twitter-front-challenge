@@ -57,6 +57,10 @@ export const StyledButton = styled.button<ButtonProps>`
     &:hover {
       ${(props) => getButtonTypeCss(props)["&:hover"]}
     }
+  
+  @media (max-width: 500px) {
+    padding: 8px 16px;
+  }
 `;
 
 const getButtonSizeCss = (size: ButtonSize) : CSSObject => {

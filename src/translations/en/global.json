@@ -43,7 +43,8 @@
     "password-match": "Passwords must match",
     "name-length": "Name cant be longer than 35 characters",
     "content-length": "Tweet cant be longer than 240 characters",
-    "max-images": "You can only upload up to 4 images"
+    "max-images": "You can only upload up to 4 images",
+    "message-size": "Message cant be longer than 240 characters"
   },
   "input-params": {
     "username": "Username",
