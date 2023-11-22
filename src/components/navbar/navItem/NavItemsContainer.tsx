@@ -12,7 +12,6 @@ export const StyledNavItemsContainer = styled.div`
 
   @media (max-width: 600px) {
     padding-top: 0;
-    max-width: 600px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;

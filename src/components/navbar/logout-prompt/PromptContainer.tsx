@@ -30,4 +30,13 @@ export const StyledPromptContainer = styled.div`
       display: flex;
     }
   }
+  
+  @media (max-width: 600px) {
+    position: fixed;
+    top: 73%;
+    right: 16px;
+    z-index: 1;
+    min-width: 0;
+    width: 60%;
+  }
 `;

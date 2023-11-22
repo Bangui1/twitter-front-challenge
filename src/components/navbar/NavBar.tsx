@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 import NavItem from "./navItem/NavItem";
 import Button from "../button/Button";
 import {useLocation, useNavigate} from "react-router-dom";
@@ -12,12 +12,14 @@ import {useTranslation} from "react-i18next";
 import {ButtonSize, ButtonType} from "../button/StyledButton";
 import Icon from "../../assets/icon.jpg";
 import {useAppSelector} from "../../redux/hooks";
-import {StyledNavBarContainer} from "./NavBarContainer";
+import {NavBarLittleDots, StyledNavBarContainer} from "./NavBarContainer";
 import {StyledContainer} from "../common/Container";
 import {StyledIconContainer} from "./IconContainer";
 import {StyledNavItemsContainer} from "./navItem/NavItemsContainer";
 import {StyledP} from "../common/text";
 import {useOutsideAlerter} from "../../hooks/useOutsideAlerter";
+import {NavDataContainer} from "./navItem/NavDataContainer";
+import {NavAvatarContainer} from "./navItem/NavAvatarContainer";
 
 const NavBar = () => {
   const location = useLocation();
@@ -27,6 +29,10 @@ const NavBar = () => {
   const [logoutOpen, setLogoutOpen] = useState(false);
   const { t } = useTranslation();
   const alerter = useOutsideAlerter({onOutsideClick: () => setLogoutOpen(false)})
+  const isInBlacklist = useMemo(() => {
+    return ["messages"]
+        .every((path) => !location.pathname.includes(path));
+  }, [location.pathname]);
   const handleAvatarClick = () => {
     if (window.innerWidth < 1265) {
       handleLogout();
@@ -73,7 +79,7 @@ const NavBar = () => {
               }}
               active={location.pathname === `/messages`}
           />
-          <StyledTweetButton
+          {isInBlacklist && <StyledTweetButton
             onClick={() =>
               window.innerWidth > 600
                 ? setTweetModalOpen(true)
@@ -81,7 +87,7 @@ const NavBar = () => {
             }
           >
             +
-          </StyledTweetButton>
+          </StyledTweetButton>}
         </StyledNavItemsContainer>
         <StyledContainer width={"100%"}>
           <Button
@@ -100,12 +106,10 @@ const NavBar = () => {
           }}
         />
       </StyledContainer>
-      <StyledContainer
-        flex={1}
+      <NavAvatarContainer
         maxHeight={"48px"}
         flexDirection={"row"}
         gap={"8px"}
-        alignItems={"center"}
       >
         <LogoutPrompt show={logoutOpen} alerter={alerter} />
         <Avatar
@@ -113,7 +117,7 @@ const NavBar = () => {
           onClick={handleAvatarClick}
           alt={user?.name ?? ""}
         />
-        <StyledContainer
+        <NavDataContainer
           width={"100%"}
           flexDirection={"row"}
           justifyContent={"space-between"}
@@ -123,9 +127,9 @@ const NavBar = () => {
             <StyledP primary>{user.name}</StyledP>
             <StyledP primary={false}>{`@${user.username}`}</StyledP>
           </StyledContainer>
-          <ThreeDots onClick={handleLogout} />
-        </StyledContainer>
-      </StyledContainer>
+          <NavBarLittleDots onClick={handleLogout} />
+        </NavDataContainer>
+      </NavAvatarContainer>
     </StyledNavBarContainer>
   );
 };

@@ -19,5 +19,11 @@ export const StyledAvatarContainer = styled.div`
     height: 100%;
     object-fit: cover;
     object-position: center;
+    @media (max-width: 600px) {
+      max-width: ${(props: AvatarContainerProps) => !props.width ? "48px" : "100%"};
+      height: ${(props: AvatarContainerProps) => !props.height ? "48px" : "100%"};
+    }
   }
+
+  
 `;
