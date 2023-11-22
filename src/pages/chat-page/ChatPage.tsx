@@ -71,13 +71,11 @@ const ChatPage = () => {
         });
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         getChat();
     }, []);
 
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         socket.connect();
         socket.emit("chatroom", {chatroomId: id});
@@ -94,7 +92,6 @@ const ChatPage = () => {
         };
     }, []);
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
         if (messagesRef.current) {
             messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
